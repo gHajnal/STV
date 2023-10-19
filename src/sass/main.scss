@@ -1,18 +1,13 @@
-// Initial setup is as follows
+@import "global";
+@import "abstracts/variables";
+@import "abstracts/mixins";
 
-// |– abstracts/ # 
-// |   |– _variables.scss    # Sass Variables
-// |   |– _mixins.scss       # Sass Mixins
-// |
-// |– components/
-// |   |– _card.scss      # Cards
-// |
-// |– layout/
-// |   |– _forms.scss        # Forms
-// |
-// |– themes/
-// |   |– _theme.scss        # Default theme
-// |   |– _guest.scss        # Guest theme
-// |   |– _admin.scss        # Admin theme
+@import "base/typography";
 
-// `– main.scss              # Main Sass file
+@import "layout/forms";
+
+@import "components/card";
+
+@import "themes/theme";
+@import "themes/guest";
+@import "themes/admin";
