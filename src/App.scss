@@ -1,0 +1,32 @@
+html {
+  height: 100vh;
+  width: 100vw;
+  margin: 0;
+}
+
+body {
+  margin: 0;
+  height: 100%;
+  width: 100%;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: flex-start;
+}
+
+.main-container {
+  min-height: 55rem;
+  width: 72vw;
+  margin: 1.5rem 0 0 0;
+  border-radius: 11px;
+  background: rgb(224, 233, 255);
+  box-shadow: 0px 4px 220px 0px rgba(0, 0, 0, 0.35);
+
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: space-evenly;
+  justify-content: space-evenly;
+}

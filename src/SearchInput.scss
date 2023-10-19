@@ -1,0 +1,50 @@
+.area {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  justify-content: space-evenly;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  justify-content: flex-start;
+  margin: 0 1rem 0.5rem 0.5rem;
+}
+
+.subtitle {
+  color: #333;
+  font-family: Inter;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  margin: 1rem 0 0.5rem 0;
+}
+
+.errorLabel {
+  padding-top: 0.2rem;
+  color: red;
+  font-size: xx-small;
+}
+
+.button {
+  position: relative;
+  bottom: 0rem;
+  width: 10rem;
+  height: 2rem;
+  border-radius: 5px;
+  border-style: none;
+  background: #90abfa;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  margin: 1rem 0 0 0;
+  font-variant: small-caps;
+  font-weight: 700;
+}
+
+[disabled] {
+  background: #ccc;
+}
