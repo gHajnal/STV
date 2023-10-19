@@ -1,4 +1,5 @@
 @import "global";
+
 @import "abstracts/variables";
 @import "abstracts/mixins";
 
@@ -7,7 +8,3 @@
 @import "layout/forms";
 
 @import "components/card";
-
-@import "themes/theme";
-@import "themes/guest";
-@import "themes/admin";
