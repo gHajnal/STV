@@ -1,4 +1,4 @@
-import Card from "../src/UI/Card";
+import Card from "../ui/card/Card";
 
 function Result(props) {
   const title = `Result - ${props.result.isPassed ? "PASSED" : "FAILED"}`;

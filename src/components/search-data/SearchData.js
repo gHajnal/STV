@@ -1,4 +1,4 @@
-import SearchInput from "./SearchInput";
+import SearchInput from "../search-input/SearchInput";
 
 import "./SearchData.scss";
 

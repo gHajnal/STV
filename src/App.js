@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 
-import Overlay from "./UI/Overlay";
-import Result from "./Result";
-import SearchData from "./SearchData";
+import Overlay from "../src/components/ui/spinner-overlay/Overlay";
+import Result from "../src/components/result/Result";
+import SearchData from "../src/components/search-data/SearchData";
 
 import "./index.scss";
 

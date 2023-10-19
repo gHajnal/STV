@@ -1,6 +1,6 @@
 import Section from "../section/Section";
 
-import "../sass/components/_card.scss";
+import "../card/Card.scss";
 
 function Card(props) {
   return (
