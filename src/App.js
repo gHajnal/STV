@@ -4,7 +4,7 @@ import Overlay from "./UI/Overlay";
 import Result from "./Result";
 import SearchData from "./SearchData";
 
-import "./App.scss";
+import "./index.scss";
 
 function App() {
   const initialResultState = {
@@ -74,13 +74,13 @@ function App() {
   };
 
   return (
-    <div className="main-container">
+    <>
       <SearchData verify={verifyText} reset={resetHandler}></SearchData>
       {result.resultText.length > 0 && (
         <Result result={result} reset={resetHandler}></Result>
       )}
       {isLoading && <Overlay />}
-    </div>
+    </>
   );
 }
 
