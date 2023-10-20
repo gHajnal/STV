@@ -1,5 +1,6 @@
-import "./Overlay.scss";
 import Spinner from "./Spinner";
+
+import "./Overlay.scss";
 
 function Overlay(props) {
   return (

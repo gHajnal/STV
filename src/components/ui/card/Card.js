@@ -1,6 +1,6 @@
 import Section from "../section/Section";
 
-import "../card/Card.scss";
+import "../../../sass/main.scss"; // am I sure of this?
 
 function Card(props) {
   return (

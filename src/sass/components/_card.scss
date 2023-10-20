@@ -1,0 +1,59 @@
+@use "../abstracts/" as a;
+.outer-container {
+  height: 100%;
+  width: auto;
+  @include a.flexbox(
+    $direction: row,
+    $wrap: wrap,
+    $alignContent: space-evenly,
+    $justifyContent: space-evenly
+  );
+}
+.inner-container {
+  min-height: 16rem;
+  min-width: 16rem;
+  height: 18rem;
+  width: 24rem;
+
+  margin: 3vh;
+  padding: 5vh;
+
+  @include a.flexbox($wrap: nowrap, $justifyContent: space-between);
+
+  background: a.$default-color-background-card;
+  border-radius: 11px;
+  box-shadow: 4px 4px 30px 0px rgba(0, 0, 0, 0.1);
+
+  &.passed {
+    background-color: rgba(a.$default-color-passed, 0.15) !important;
+    color: a.$default-color-passed;
+  }
+
+  &.failed {
+    background-color: rgba(a.$default-color-failed, 0.15) !important;
+    color: a.$default-color-failed;
+  }
+
+  .area {
+    @include a.flexbox(
+      $alignContent: flex-start,
+      $justifyContent: space-evenly
+    );
+
+    .section {
+      margin: 0 1rem 0.5rem 0.5rem;
+      @include a.flexbox(
+        $alignContent: flex-start,
+        $justifyContent: flex-start
+      );
+    }
+
+    .section-result {
+      @include a.flexbox(
+        $direction: row,
+        $alignContent: center,
+        $justifyContent: flex-start
+      );
+    }
+  }
+}

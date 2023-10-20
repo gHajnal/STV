@@ -4,8 +4,6 @@ import Overlay from "../src/components/ui/spinner-overlay/Overlay";
 import Result from "../src/components/result/Result";
 import SearchData from "../src/components/search-data/SearchData";
 
-import "./index.scss";
-
 function App() {
   const initialResultState = {
     term: "",
@@ -74,13 +72,13 @@ function App() {
   };
 
   return (
-    <>
+    <div className="outer-container">
       <SearchData verify={verifyText} reset={resetHandler}></SearchData>
       {result.resultText.length > 0 && (
         <Result result={result} reset={resetHandler}></Result>
       )}
       {isLoading && <Overlay />}
-    </>
+    </div>
   );
 }
 

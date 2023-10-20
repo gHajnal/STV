@@ -1,0 +1,51 @@
+@use "../abstracts/" as a;
+
+.title {
+  margin: 0 0 1rem 0;
+  border-bottom: a.$default-color-text solid 0.1rem;
+  font-family: Inter;
+  font-size: 2rem;
+  //font-weight: 900;
+  color: a.$default-color-text;
+}
+
+.subtitle {
+  margin: 1rem 0 0.5rem 0;
+  font-family: Inter;
+  font-size: 1rem;
+  font-weight: 600;
+  color: a.$default-color-text;
+}
+
+.errorLabel {
+  padding-top: 0.2rem;
+  font-size: xx-small;
+  color: a.$default-color-failed;
+}
+
+.result {
+  font-variant: small-caps;
+  font-weight: 700;
+
+  &-text {
+    @extend .result;
+    margin: 0 2rem;
+    @include a.flexbox($direction: row, $alignContent: center);
+  }
+
+  &-passed {
+    @extend .result;
+    text-align: center;
+    margin: 1rem;
+    border: a.$default-color-passed 0.2rem solid;
+    color: a.$default-color-passed;
+  }
+
+  &-failed {
+    @extend .result;
+    text-align: center;
+    margin: 1rem;
+    border: a.$default-color-failed 0.2rem solid;
+    color: a.$default-color-failed;
+  }
+}

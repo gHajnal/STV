@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import "./SearchInput.scss";
+import "../../sass/main.scss";
 
 function SearchInput(props) {
   const initialInputState = {

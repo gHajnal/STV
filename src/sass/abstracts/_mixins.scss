@@ -1,0 +1,17 @@
+/**
+ * @mixin flexbox is covering the most common flexbox setup. 
+ * Please be aware that $direction is *column* by default (instead of row)! 
+ */
+@mixin flexbox(
+  $display: flex,
+  $direction: column,
+  $wrap: wrap,
+  $alignContent: null,
+  $justifyContent: null
+  ) {
+    display: $display;
+    flex-direction: $direction;
+    flex-wrap: $wrap;
+    align-content: $alignContent;
+    justify-content: $justifyContent;
+  }
