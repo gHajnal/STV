@@ -1,4 +1,5 @@
 @use "../abstracts/" as a;
+
 .outer-container {
   height: 100%;
   width: auto;
@@ -9,6 +10,7 @@
     $justifyContent: space-evenly
   );
 }
+
 .inner-container {
   min-height: 16rem;
   min-width: 16rem;
