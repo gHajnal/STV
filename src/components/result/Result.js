@@ -1,4 +1,6 @@
-import Card from "../src/UI/Card";
+import Card from "../ui/card/Card";
+
+import "../../sass/main.scss";
 
 function Result(props) {
   const title = `Result - ${props.result.isPassed ? "PASSED" : "FAILED"}`;

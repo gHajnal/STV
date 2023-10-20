@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 
-import Overlay from "./UI/Overlay";
-import Result from "./Result";
-import SearchData from "./SearchData";
-
-import "./index.scss";
+import Overlay from "../src/components/ui/spinner-overlay/Overlay";
+import Result from "../src/components/result/Result";
+import SearchData from "../src/components/search-data/SearchData";
 
 function App() {
   const initialResultState = {
@@ -74,13 +72,13 @@ function App() {
   };
 
   return (
-    <>
+    <div className="outer-container">
       <SearchData verify={verifyText} reset={resetHandler}></SearchData>
       {result.resultText.length > 0 && (
         <Result result={result} reset={resetHandler}></Result>
       )}
       {isLoading && <Overlay />}
-    </>
+    </div>
   );
 }
 

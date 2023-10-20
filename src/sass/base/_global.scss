@@ -1,3 +1,8 @@
+/**
+* Replacement for index.css/index.scss
+*/
+@use "../abstracts/" as a;
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
@@ -16,13 +21,19 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  margin: 0;
   height: 100%;
   width: 100%;
   background-color: #fff;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  align-content: center;
-  justify-content: flex-start;
+
+  @include a.flexbox($alignContent: center, $justifyContent: flex-start);
+}
+
+#root {
+  height: 100%;
+  width: 100%;
+  @include a.flexbox(
+    $direction: row,
+    $alignContent: space-evenly,
+    $justifyContent: space-evenly
+  );
 }

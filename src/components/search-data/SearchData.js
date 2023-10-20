@@ -1,6 +1,6 @@
-import SearchInput from "./SearchInput";
+import SearchInput from "../search-input/SearchInput";
 
-import "./SearchData.scss";
+import "../../sass/main.scss";
 
 function SearchData(props) {
   const dataHandler = (userInput) => {
