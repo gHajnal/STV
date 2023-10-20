@@ -2,7 +2,7 @@ import Spinner from "./Spinner";
 
 import "./Overlay.scss";
 
-function Overlay(props) {
+function Overlay() {
   return (
     <div className="overlay">
       <Spinner></Spinner>
