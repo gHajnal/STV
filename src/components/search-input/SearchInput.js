@@ -8,82 +8,73 @@ function SearchInput(props) {
     url: "",
     isDisabled: true,
 
-    errorU: false,
+    isUrlValid: false,
     messageU: "",
 
-    errorT: false,
+    isTermValid: false,
     messageT: "",
   };
 
   const [userInput, setUserInput] = useState(initialInputState);
 
   const urlInputHandler = (event) => {
+    const urlValidator = (url) => {
+      return {
+        cleanedUrlInput: url.trim(),
+        isUrlValid: url?.includes("http"),
+      };
+    };
+
+    const validatedUrlObj = urlValidator(event.target.value);
+
     setUserInput((prev) => {
       return {
         ...prev,
-        url: event.target.value.trim(),
+        url: validatedUrlObj.cleanedUrlInput,
+        isUrlValid: validatedUrlObj.isUrlValid,
+        isDisabled: !(validatedUrlObj.isUrlValid && prev.isTermValid),
       };
     });
   };
 
   const termInputHandler = (event) => {
+    const termValidator = (term) => {
+      return {
+        cleanedTermInput: term.trim(),
+        isTermValid: term?.length > 0 && term?.length < 11,
+      };
+    };
     setUserInput((prev) => {
+      const termValidityObj = termValidator(event.target.value);
       return {
         ...prev,
-        term: event.target.value.trim(),
+        term: termValidityObj.cleanedTermInput,
+        isTermValid: termValidityObj.isTermValid,
+        isDisabled: !(termValidityObj.isTermValid && prev.isUrlValid),
       };
     });
   };
 
-  const urlErrorHandler = (event) => {
-    const value = event.target.value.trim();
-
-    if (value.length > 0 && value.includes("http")) {
-      setUserInput((prev) => {
-        // "errorInUrl" const is added to make sure errorU and isDisabled both receives the value
-        const errorInUrl = false;
-        return {
-          ...prev,
-          errorU: errorInUrl,
-          isDisabled: prev.term.length === 0 || prev.errorT || errorInUrl,
-          messageU: "",
-        };
-      });
-    } else {
-      setUserInput((prev) => {
-        return {
-          ...prev,
-          errorU: true,
-          isDisabled: true,
-          messageU: '"URL" is considered valid if contains "http"',
-        };
-      });
+  const errorHandler = (event) => {
+    if (event.target.name === "url") {
+      if (!userInput.isUrlValid) {
+        setUserInput((prev) => {
+          return {
+            ...prev,
+            messageU: '"URL" is considered valid if contains "http"',
+          };
+        });
+      }
     }
-  };
-
-  const termErrorHandler = (event) => {
-    const value = event.target.value.trim();
-
-    if (value.length > 0 && value.length < 10) {
-      setUserInput((prev) => {
-        // "errorInUrl" const is added to make sure errorT and isDisabled both receives the value
-        const errorInTerm = false;
-        return {
-          ...prev,
-          messageT: "",
-          errorT: errorInTerm,
-          isDisabled: prev.url.length === 0 || prev.errorU || errorInTerm,
-        };
-      });
-    } else {
-      setUserInput((prev) => {
-        return {
-          ...prev,
-          isDisabled: true,
-          errorT: true,
-          messageT: '"Term" is considered valid if length is between 0, 10',
-        };
-      });
+    if (event.target.name === "term") {
+      if (!userInput.isTermValid) {
+        setUserInput((prev) => {
+          return {
+            ...prev,
+            messageT: '"Term" is considered valid if length is between 0, 10',
+          };
+        });
+      }
     }
   };
 
@@ -102,13 +93,13 @@ function SearchInput(props) {
         <input
           type="text"
           id="urlInput"
+          name="url"
           placeholder="URL"
           value={userInput.url}
           onChange={urlInputHandler}
-          onBlur={urlErrorHandler}
-          required
+          onBlur={errorHandler}
         ></input>
-        {userInput.errorU && (
+        {!userInput.isUrlValid && (
           <label className="errorLabel">{userInput.messageU}</label>
         )}
       </div>
@@ -119,13 +110,13 @@ function SearchInput(props) {
         <input
           type="text"
           id="termInput"
+          name="term"
           placeholder="Search term"
           value={userInput.term}
           onChange={termInputHandler}
-          onBlur={termErrorHandler}
-          required
+          onBlur={errorHandler}
         ></input>
-        {userInput.errorT && (
+        {!userInput.isTermValid && (
           <label className="errorLabel">{userInput.messageT}</label>
         )}
       </div>
