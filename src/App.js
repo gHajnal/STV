@@ -9,7 +9,7 @@ function App() {
     term: "",
     url: "",
     isPassed: false,
-    resultText: "",
+    text: "",
   };
 
   const [isLoading, setIsLoading] = useState(false);
@@ -23,31 +23,29 @@ function App() {
   // PROXYURL is required by  [CORS Anywhere] module
   const PROXYURL = "https://cors-anywhere.herokuapp.com/";
 
-  const verifyText = async (userInput) => {
+  const searchHandler = async (searchDetails) => {
     setResult((prev) => {
-      const res = {
+      return {
         ...prev,
+        url: searchDetails.url,
+        term: searchDetails.term,
       };
-
-      res.url = userInput.url;
-      res.term = userInput.term;
-
-      return res;
     });
 
     setIsLoading(true);
-    const page = await fetch(PROXYURL + userInput.url);
+
+    const page = await fetch(PROXYURL + searchDetails.url);
 
     if (page.ok) {
       setIsLoading(false);
       const body = await page.text((r) => r.json());
 
-      if (body.includes(userInput.term)) {
+      if (body.includes(searchDetails.term)) {
         setResult((prev) => {
           const res = {
             ...prev,
           };
-          res.resultText = `"${userInput.term}" found on ${userInput.url}`;
+          res.text = `"${searchDetails.term}" found on ${searchDetails.url}`;
           res.isPassed = true;
           return res;
         });
@@ -56,7 +54,7 @@ function App() {
           const res = {
             ...prev,
           };
-          res.resultText = `Did not find "${userInput.term}" on ${userInput.url}!`;
+          res.text = `Did not find "${searchDetails.term}" on ${searchDetails.url}!`;
           res.isPassed = false;
           return res;
         });
@@ -73,10 +71,8 @@ function App() {
 
   return (
     <div className="outer-container">
-      <SearchData verify={verifyText} reset={resetHandler}></SearchData>
-      {result.resultText.length > 0 && (
-        <Result result={result} reset={resetHandler}></Result>
-      )}
+      <SearchData verify={searchHandler}></SearchData>
+      {result.text.length > 0 && <Result result={result}></Result>}
       {isLoading && <Overlay />}
     </div>
   );

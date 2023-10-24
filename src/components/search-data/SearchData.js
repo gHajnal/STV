@@ -3,11 +3,11 @@ import SearchInput from "../search-input/SearchInput";
 import "../../sass/main.scss";
 
 function SearchData(props) {
-  const dataHandler = (userInput) => {
-    if (userInput.url !== "") {
+  const dataHandler = (userData) => {
+    if (userData.url !== "") {
       const data = {
-        url: userInput.url,
-        term: userInput.term,
+        url: userData.url,
+        term: userData.term,
       };
       props.verify(data);
     }
