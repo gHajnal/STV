@@ -12,7 +12,19 @@ function App() {
     text: "",
   };
 
+  const initialModal = {
+    showModal: false,
+    card: {
+      title: "",
+      containerClass: "",
+      resultClass: "",
+      resultObject: "",
+      text: "",
+    },
+  };
+
   const [isLoading, setIsLoading] = useState(false);
+  const [modal, setModal] = useState(initialModal);
 
   const [result, setResult] = useState(initialResultState);
 
@@ -29,14 +41,76 @@ function App() {
         ...prev,
         url: searchDetails.url,
         term: searchDetails.term,
+        text: "",
       };
     });
 
+    setModal(initialModal);
     setIsLoading(true);
 
-    const page = await fetch(PROXYURL + searchDetails.url);
+    let page;
+    try {
+      page = await fetch(PROXYURL + searchDetails.url);
+    } catch (error) {
+      setIsLoading(false);
+      setModal({
+        showModal: true,
+        card: {
+          title: "Search failed",
+          containerClass: "modal",
+          resultClass: "details",
+          resultObject: {
+            result: "Pending, than failed.",
+            url: searchDetails.url,
+            term: searchDetails.term,
+            hint: "Make sure to use the correct URL!",
+          },
+        },
+      });
+    }
 
-    if (page.ok) {
+    if (page?.status !== undefined && page?.status !== 200) {
+      setIsLoading(false);
+      switch (page?.status) {
+        case 404:
+          setModal({
+            showModal: true,
+            card: {
+              title: "Page not found!",
+              containerClass: "modal",
+              resultClass: "details",
+              resultObject: {
+                result: page.statusText,
+                url: searchDetails.url,
+                term: searchDetails.term,
+                hint: "Provide existing URL address",
+              },
+            },
+          });
+          break;
+        default:
+          setModal({
+            showModal: true,
+            card: {
+              title: "Something went wrong",
+              containerClass: "modal",
+              resultClass: "details",
+              resultObject: {
+                result: page.statusText,
+                url: searchDetails.url,
+                term: searchDetails.term,
+                hint: "Provide existing URL address",
+              },
+            },
+          });
+          break;
+      }
+
+      resetHandler();
+      return;
+    }
+
+    if (page?.ok) {
       setIsLoading(false);
       const body = await page.text((r) => r.json());
 
@@ -45,7 +119,7 @@ function App() {
           const res = {
             ...prev,
           };
-          res.text = `"${searchDetails.term}" found on ${searchDetails.url}`;
+          res.text = `"${searchDetails.term}" found on the provided URL`;
           res.isPassed = true;
           return res;
         });
@@ -54,26 +128,31 @@ function App() {
           const res = {
             ...prev,
           };
-          res.text = `Did not find "${searchDetails.term}" on ${searchDetails.url}!`;
+          res.text = `Did not find "${searchDetails.term}" on the provided URL!`;
           res.isPassed = false;
           return res;
         });
       }
     }
+  };
 
-    if (page.status !== 200) {
-      setIsLoading(false);
-      alert("Most possible error: URL DOES NOT EXIST!");
-      resetHandler();
-      return;
-    }
+  const clickHandler = () => {
+    setIsLoading(false);
+    setModal((p) => {
+      return (p.showModal = false);
+    });
+    setModal(initialModal);
+    setResult(initialResultState);
   };
 
   return (
     <div className="outer-container">
       <SearchData verify={searchHandler}></SearchData>
       {result.text.length > 0 && <Result result={result}></Result>}
-      {isLoading && <Overlay />}
+      {isLoading && <Overlay onClick={clickHandler} what="spinner" />}
+      {modal.showModal && (
+        <Overlay onClick={clickHandler} what="modal" data={modal} />
+      )}
     </div>
   );
 }

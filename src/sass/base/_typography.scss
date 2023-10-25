@@ -2,6 +2,7 @@
 
 .title {
   margin: 0 0 1rem 0;
+  padding: 0 0 0.5rem 0;
   border-bottom: a.$default-color-text solid 0.1rem;
   font-family: Inter;
   font-size: 2rem;
@@ -10,7 +11,7 @@
 }
 
 .subtitle {
-  margin: 1rem 0 0.5rem 0;
+  margin: 0.5rem 0 0.5rem 0;
   font-family: Inter;
   font-size: 1rem;
   font-weight: 600;
@@ -26,25 +27,32 @@
 .result {
   font-variant: small-caps;
   font-weight: 700;
-
+  text-align: center;
+  word-break: break-all;
+  max-height: 30vh;
+  overflow: hidden;
+  white-space: wrap;
+  padding: 1rem;
   &-text {
     @extend .result;
-    margin: 0 2rem;
-    @include a.flexbox($direction: row, $alignContent: center);
+    @include a.flexbox(
+      $direction: column,
+      $alignContent: center,
+      $justifyContent: flex-start
+    );
+    margin: 0 0 0 2rem;
   }
 
   &-passed {
     @extend .result;
-    text-align: center;
-    margin: 1rem;
+    margin: 0.5rem 0 1rem 0.5rem;
     border: a.$default-color-passed 0.2rem solid;
     color: a.$default-color-passed;
   }
 
   &-failed {
     @extend .result;
-    text-align: center;
-    margin: 1rem;
+    margin: 0.5rem 0 1rem 0.5rem;
     border: a.$default-color-failed 0.2rem solid;
     color: a.$default-color-failed;
   }

@@ -3,10 +3,10 @@ import "../../../sass/main.scss";
 function Section(props) {
   return (
     <div className="section-result">
-      <span className="subtitle">
+      <div className="subtitle">
         {props.sectionTitle.toString().toUpperCase()}
-      </span>
-      <span className="result-text">{props.sectionValue}</span>
+      </div>
+      <div className="result-text">{props.sectionValue}</div>
     </div>
   );
 }

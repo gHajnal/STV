@@ -5,31 +5,28 @@ import "../../../sass/main.scss";
 function Card(props) {
   return (
     <div className={`inner-container ${props?.containerClass}`}>
-      <div>
-        <h1 className="title">{props.title}</h1>
-        {props.resultClass && (
-          <div className={props?.resultClass}>{props?.resultText}</div>
-        )}
-        {props?.resultObject && (
-          <div className="area">
-            {Object.entries(props?.resultObject).map((sectionTitle, b) => {
-              let comp = "";
-
-              Object.entries(sectionTitle).map((sectionValue, v) => {
-                comp = (
-                  <Section
-                    key={Math.trunc(Math.random() * 1000).toString()}
-                    sectionTitle={sectionTitle[0]}
-                    sectionValue={sectionValue[1]}
-                  ></Section>
-                );
-                return comp;
-              });
+      <h1 className="title">{props.title}</h1>
+      {props.resultClass && (
+        <div className={props?.resultClass}>{props?.resultText}</div>
+      )}
+      {props?.resultObject && (
+        <div className="area">
+          {Object.entries(props?.resultObject).map((sectionTitle, b) => {
+            let comp = "";
+            Object.entries(sectionTitle).map((sectionValue, v) => {
+              comp = (
+                <Section
+                  key={Math.trunc(Math.random() * 1000).toString()}
+                  sectionTitle={sectionTitle[0]}
+                  sectionValue={sectionValue[1]}
+                ></Section>
+              );
               return comp;
-            })}
-          </div>
-        )}
-      </div>
+            });
+            return comp;
+          })}
+        </div>
+      )}
       {props.children}
     </div>
   );
