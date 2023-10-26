@@ -1,20 +1,38 @@
 @use "../abstracts/" as a;
 
-.title {
-  margin: 0 0 1rem 0;
-  border-bottom: a.$default-color-text solid 0.1rem;
-  font-family: Inter;
-  font-size: 2rem;
-  font-weight: 900;
+$primary-font-size: 2rem;
+$secondary-font-size: 1rem;
+$tertiary-font-size: 0.8rem;
+
+.base {
+  font-family: monospace;
   color: a.$default-color-text;
 }
 
+.title {
+  @extend .base;
+  margin: 0 0 1rem 0;
+  padding: 0 0 0.5rem 0;
+  border-bottom: a.$default-color-text solid 0.1rem;
+  font-size: $primary-font-size;
+  font-weight: 900;
+}
+
 .subtitle {
-  margin: 1rem 0 0.5rem 0;
-  font-family: Inter;
-  font-size: 1rem;
+  @extend .base;
+  margin: 0.5rem 0 0.5rem 0;
+  font-size: $secondary-font-size;
   font-weight: 600;
-  color: a.$default-color-text;
+  text-transform: capitalize;
+
+  // subtitle-modal
+  &-modal {
+    @extend .base;
+    font-size: $tertiary-font-size;
+    color: a.$default-color-text;
+    font-weight: 700;
+    text-transform: capitalize;
+  }
 }
 
 .errorLabel {
@@ -24,27 +42,42 @@
 }
 
 .result {
-  font-variant: small-caps;
-  font-weight: 700;
+  @extend .base;
+  font-weight: 500;
+  word-break: break-all;
+  max-height: 30vh;
+  overflow: hidden;
+  white-space: wrap;
+  padding: 0.5rem;
 
+  // result-text
   &-text {
     @extend .result;
-    margin: 0 2rem;
-    @include a.flexbox($direction: row, $alignContent: center);
+    @include a.flexbox(
+      $direction: column,
+      $alignContent: center,
+      $justifyContent: space-between
+    );
+    margin: 0 0 0 2rem;
+    color: a.$default-color-text;
+
+    // result-text-modal
+    &-modal {
+      font-size: $tertiary-font-size;
+      margin-left: 1rem;
+    }
   }
 
   &-passed {
     @extend .result;
-    text-align: center;
-    margin: 1rem;
+    margin: 0.5rem 0 1rem 0.5rem;
     border: a.$default-color-passed 0.2rem solid;
     color: a.$default-color-passed;
   }
 
   &-failed {
     @extend .result;
-    text-align: center;
-    margin: 1rem;
+    margin: 0.5rem 0 1rem 0.5rem;
     border: a.$default-color-failed 0.2rem solid;
     color: a.$default-color-failed;
   }

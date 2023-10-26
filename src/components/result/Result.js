@@ -3,7 +3,7 @@ import Card from "../ui/card/Card";
 import "../../sass/main.scss";
 
 function Result(props) {
-  const title = `Result - ${props.result.isPassed ? "PASSED" : "FAILED"}`;
+  const title = `Result - ${props.result.isPassed ? "VERIFIED" : "FAILED"}`;
   const containerClass = `${props.result.isPassed ? "passed" : "failed"}`;
   const resultClass = `result${props.result.isPassed ? "-passed" : "-failed"}`;
   const resultText = props.result.text;
