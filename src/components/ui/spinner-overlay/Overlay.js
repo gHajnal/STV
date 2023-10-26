@@ -4,13 +4,15 @@ import Card from "../card/Card";
 import "./Overlay.scss";
 
 function Overlay(props) {
-  let show;
+  let spinner;
+  let modal;
+
   const handleClick = () => {
     props.onClick();
   };
 
   if (props.what === "spinner") {
-    show = (
+    spinner = (
       <div onClick={handleClick} className="overlay">
         <Spinner></Spinner>
       </div>
@@ -18,19 +20,18 @@ function Overlay(props) {
   }
 
   if (props.what === "modal") {
-    show = (
+    modal = (
       <div onClick={handleClick} className="overlay">
         <Card
           title={props.data.card.title}
           containerClass={props.data.card.containerClass}
-          resultClass={props.data.card.resultClass}
           resultObject={props.data.card.resultObject}
           resultText={props.data.card.text}
+          cardType="modal"
         />
       </div>
     );
   }
-
-  return show;
+  return props.what === "modal" ? modal : spinner;
 }
 export default Overlay;

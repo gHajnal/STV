@@ -1,21 +1,38 @@
 @use "../abstracts/" as a;
 
-.title {
-  margin: 0 0 1rem 0;
-  padding: 0 0 0.5rem 0;
-  border-bottom: a.$default-color-text solid 0.1rem;
-  font-family: Inter;
-  font-size: 2rem;
-  font-weight: 900;
+$primary-font-size: 2rem;
+$secondary-font-size: 1rem;
+$tertiary-font-size: 0.8rem;
+
+.base {
+  font-family: monospace;
   color: a.$default-color-text;
 }
 
+.title {
+  @extend .base;
+  margin: 0 0 1rem 0;
+  padding: 0 0 0.5rem 0;
+  border-bottom: a.$default-color-text solid 0.1rem;
+  font-size: $primary-font-size;
+  font-weight: 900;
+}
+
 .subtitle {
+  @extend .base;
   margin: 0.5rem 0 0.5rem 0;
-  font-family: Inter;
-  font-size: 1rem;
+  font-size: $secondary-font-size;
   font-weight: 600;
-  color: a.$default-color-text;
+  text-transform: capitalize;
+
+  // subtitle-modal
+  &-modal {
+    @extend .base;
+    font-size: $tertiary-font-size;
+    color: a.$default-color-text;
+    font-weight: 700;
+    text-transform: capitalize;
+  }
 }
 
 .errorLabel {
@@ -25,22 +42,30 @@
 }
 
 .result {
-  font-variant: small-caps;
-  font-weight: 700;
-  text-align: center;
+  @extend .base;
+  font-weight: 500;
   word-break: break-all;
   max-height: 30vh;
   overflow: hidden;
   white-space: wrap;
-  padding: 1rem;
+  padding: 0.5rem;
+
+  // result-text
   &-text {
     @extend .result;
     @include a.flexbox(
       $direction: column,
       $alignContent: center,
-      $justifyContent: flex-start
+      $justifyContent: space-between
     );
     margin: 0 0 0 2rem;
+    color: a.$default-color-text;
+
+    // result-text-modal
+    &-modal {
+      font-size: $tertiary-font-size;
+      margin-left: 1rem;
+    }
   }
 
   &-passed {

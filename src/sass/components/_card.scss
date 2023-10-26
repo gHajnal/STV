@@ -35,6 +35,8 @@
     transform: translateY(50%);
     margin: auto;
     background-color: a.$default-color-modal !important;
+    @include a.flexbox($wrap: nowrap, $justifyContent: space-around);
+    align-items: baseline;
   }
 
   .area {
@@ -59,6 +61,16 @@
         $justifyContent: flex-start
       );
       align-items: baseline;
+
+      // section-result-modal
+      &-modal {
+        @include a.flexbox(
+          $direction: row,
+          $wrap: nowrap,
+          $justifyContent: flex-start
+        );
+        padding: 0.5rem;
+      }
     }
   }
 }

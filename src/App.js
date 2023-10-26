@@ -17,9 +17,19 @@ function App() {
     card: {
       title: "",
       containerClass: "",
+      // resultClass is set by Result, when the verification is finished (if)
       resultClass: "",
-      resultObject: "",
-      text: "",
+      resultObject: {
+        inputs: {
+          url: "",
+          term: "",
+        },
+        details: {
+          // placeholder for the error type, as it is generated from error.name or as string from response's status
+          "": "",
+          hint: "",
+        },
+      },
     },
   };
 
@@ -52,18 +62,23 @@ function App() {
     try {
       page = await fetch(PROXYURL + searchDetails.url);
     } catch (error) {
+      const eName = error.name;
+      const eMessage = error.message;
       setIsLoading(false);
       setModal({
         showModal: true,
         card: {
           title: "Search failed",
           containerClass: "modal",
-          resultClass: "details",
           resultObject: {
-            result: "Pending, than failed.",
-            url: searchDetails.url,
-            term: searchDetails.term,
-            hint: "Make sure to use the correct URL!",
+            inputs: {
+              url: searchDetails.url,
+              term: searchDetails.term,
+            },
+            details: {
+              [eName]: eMessage,
+              hint: "Click anywhere to close the modal",
+            },
           },
         },
       });
@@ -78,12 +93,15 @@ function App() {
             card: {
               title: "Page not found!",
               containerClass: "modal",
-              resultClass: "details",
               resultObject: {
-                result: page.statusText,
-                url: searchDetails.url,
-                term: searchDetails.term,
-                hint: "Provide existing URL address",
+                inputs: {
+                  url: searchDetails.url,
+                  term: searchDetails.term,
+                },
+                details: {
+                  "Cause of failure": page.statusText,
+                  hint: "Click anywhere to close the modal",
+                },
               },
             },
           });
@@ -92,14 +110,17 @@ function App() {
           setModal({
             showModal: true,
             card: {
-              title: "Something went wrong",
+              title: "Something went wrong!",
               containerClass: "modal",
-              resultClass: "details",
               resultObject: {
-                result: page.statusText,
-                url: searchDetails.url,
-                term: searchDetails.term,
-                hint: "Provide existing URL address",
+                inputs: {
+                  url: searchDetails.url,
+                  term: searchDetails.term,
+                },
+                details: {
+                  "Cause of failure": page.statusText,
+                  hint: "Click anywhere to close the modal",
+                },
               },
             },
           });
